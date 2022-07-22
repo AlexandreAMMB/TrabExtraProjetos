@@ -5,6 +5,8 @@
  */
 package model;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuário
@@ -15,21 +17,22 @@ public class ParticipanteChat extends Participante{
     
     public ParticipanteChat(MediatorChat mediatorChat, String participanteName){
         this.name = participanteName;
+        mediator = mediatorChat;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return name;
     }
 
     @Override
     public void enviar(String mensagem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void receber(String mensagem, Participante participante) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mediator.enviar(this, mensagem);
+        //JOptionPane.showMessageDialog(null, name + ", sua mensagem foi enviada!");
     }
     
+    @Override
+    public void receber(String mensagem, Participante participante) {
+        //JOptionPane.showMessageDialog(null, name + " enviou uma mensagem!");
+    }
 }

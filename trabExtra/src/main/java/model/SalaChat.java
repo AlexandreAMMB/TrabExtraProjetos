@@ -5,7 +5,9 @@
  */
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import presenter.ChatPresenter;
 
 /**
  *
@@ -14,19 +16,39 @@ import java.util.ArrayList;
 public class SalaChat implements MediatorChat{
     
     private ArrayList<Participante> participantes;
+    private ArrayList<ChatPresenter> presenters;
     
     public SalaChat(){
-        
+        participantes = new ArrayList<>();
+        presenters = new ArrayList<>();
     }
 
     @Override
     public void enviar(Participante participante, String mensagem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(ChatPresenter p : presenters) {
+            if(p.getParticipante() != participante){
+                try {
+                    p.receberMensagem(participante, mensagem);
+                } catch (IOException ex) {
+                    System.err.println(ex);
+                }
+                p.getParticipante().receber(mensagem, participante);
+            }
+        }
     }
 
     @Override
     public Participante criarParticipante(MediatorChat mediator, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Participante participante = new ParticipanteChat(mediator, name);
+        participantes.add(participante);
+        return participante;
     }
-    
+
+    public ArrayList<Participante> getParticipantes() {
+        return participantes;
+    }
+
+    public ArrayList<ChatPresenter> getPresenters() {
+        return presenters;
+    }
 }

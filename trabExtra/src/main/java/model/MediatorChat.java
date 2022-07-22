@@ -5,6 +5,8 @@
  */
 package model;
 
+import presenter.ChatPresenter;
+
 /**
  *
  * @author Usuário
