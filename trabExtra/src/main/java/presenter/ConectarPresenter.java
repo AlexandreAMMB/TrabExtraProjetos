@@ -7,6 +7,7 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import model.ParticipanteChat;
 import model.SalaChat;
@@ -21,7 +22,7 @@ public class ConectarPresenter {
     private String name;
     private SalaChat salaChat;
     
-    public ConectarPresenter(){
+    public ConectarPresenter() throws IOException{
         conectarView = new ConectarView();
         salaChat = new SalaChat();
         

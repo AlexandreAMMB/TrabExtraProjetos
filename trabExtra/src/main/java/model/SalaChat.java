@@ -5,6 +5,7 @@
  */
 package model;
 
+import chain.ProcessadorDeVerificacao;
 import java.io.IOException;
 import java.util.ArrayList;
 import presenter.ChatPresenter;
@@ -13,42 +14,37 @@ import presenter.ChatPresenter;
  *
  * @author Usuário
  */
-public class SalaChat implements MediatorChat{
+public class SalaChat implements MediatorChat {
     
-    private ArrayList<Participante> participantes;
-    private ArrayList<ChatPresenter> presenters;
-    
-    public SalaChat(){
-        participantes = new ArrayList<>();
-        presenters = new ArrayList<>();
+    private SalaChatReal real;
+    private ProcessadorDeVerificacao processador;
+
+    public SalaChat() throws IOException {
+        real = new SalaChatReal();
+        processador = new ProcessadorDeVerificacao();
     }
 
     @Override
     public void enviar(Participante participante, String mensagem) {
-        for(ChatPresenter p : presenters) {
-            if(p.getParticipante() != participante){
-                try {
-                    p.receberMensagem(participante, mensagem);
-                } catch (IOException ex) {
-                    System.err.println(ex);
-                }
-                p.getParticipante().receber(mensagem, participante);
-            }
+        mensagem = processador.processar(mensagem);
+        if (mensagem.equals("N") == false) {
+            real.enviar(participante, mensagem);
         }
     }
 
     @Override
     public Participante criarParticipante(MediatorChat mediator, String name) {
-        Participante participante = new ParticipanteChat(mediator, name);
-        participantes.add(participante);
-        return participante;
+        return real.criarParticipante(mediator, name);
     }
-
-    public ArrayList<Participante> getParticipantes() {
-        return participantes;
-    }
-
+    
+    /*public boolean accept(String mensagem) {
+        if (processador.processar(mensagem) != mensagem) {
+            return false;
+        }
+        return true;
+    }*/
+    
     public ArrayList<ChatPresenter> getPresenters() {
-        return presenters;
+        return real.getPresenters();
     }
 }

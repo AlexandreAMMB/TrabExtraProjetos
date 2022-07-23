@@ -33,8 +33,10 @@ public class ChatPresenter {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mensagem = chatView.getTxtMensagem().getText();
-                participante.enviar(mensagem);
-                chatView.getAreaChat().append(participante.getName() + " diz -> " + mensagem + "\r\n");
+                if (mensagem != null) {
+                    System.out.println(mensagem);
+                    participante.enviar(mensagem);
+                }
                 chatView.getTxtMensagem().setText("");
             }
         });
@@ -49,10 +51,9 @@ public class ChatPresenter {
         chatView.getBtnSair().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                salaChat.getParticipantes().remove(participante);
                 //JOptionPane.showMessageDialog(null, "Participante " + name + " se desconectou!");
                 chatView.dispose();
-                salaChat.getParticipantes().remove(participante);
+                //salaChat.getParticipantes().remove(participante);
                 salaChat.getPresenters().remove(this);
             }
         });
