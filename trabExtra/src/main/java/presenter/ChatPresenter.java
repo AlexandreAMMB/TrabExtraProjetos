@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package presenter;
 
 import java.awt.event.ActionEvent;
@@ -12,10 +8,6 @@ import model.Participante;
 import model.SalaChat;
 import view.ChatView;
 
-/**
- *
- * @author Usuário
- */
 public class ChatPresenter {
     private ChatView chatView;
     private SalaChat salaChat;
@@ -51,9 +43,7 @@ public class ChatPresenter {
         chatView.getBtnSair().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(null, "Participante " + name + " se desconectou!");
                 chatView.dispose();
-                //salaChat.getParticipantes().remove(participante);
                 salaChat.getPresenters().remove(this);
             }
         });

@@ -1,22 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import javax.swing.JOptionPane;
-import model.ParticipanteChat;
 import model.SalaChat;
 import view.ConectarView;
 
-/**
- *
- * @author Usuário
- */
 public class ConectarPresenter {
     private ConectarView conectarView;
     private String name;
@@ -32,7 +22,6 @@ public class ConectarPresenter {
                 name = conectarView.getTxtConectar().getText();
                 ChatPresenter chatPresenter = new ChatPresenter(salaChat, salaChat.criarParticipante(salaChat, name));
                 salaChat.getPresenters().add(chatPresenter);
-                //JOptionPane.showMessageDialog(null, "Participante " + name + " se conectou!");
                 conectarView.getTxtConectar().setText("");
             }
         });

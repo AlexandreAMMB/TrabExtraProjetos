@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import chain.ProcessadorDeVerificacao;
@@ -10,10 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import presenter.ChatPresenter;
 
-/**
- *
- * @author Usuário
- */
 public class SalaChat implements MediatorChat {
     
     private SalaChatReal real;
@@ -36,13 +28,6 @@ public class SalaChat implements MediatorChat {
     public Participante criarParticipante(MediatorChat mediator, String name) {
         return real.criarParticipante(mediator, name);
     }
-    
-    /*public boolean accept(String mensagem) {
-        if (processador.processar(mensagem) != mensagem) {
-            return false;
-        }
-        return true;
-    }*/
     
     public ArrayList<ChatPresenter> getPresenters() {
         return real.getPresenters();
